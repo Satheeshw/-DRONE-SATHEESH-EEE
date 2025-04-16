@@ -51,17 +51,42 @@ def home_page():
     st.subheader("📘 About Our Drone")
     with st.expander("🔧 Drone Specifications"):
         st.markdown("""
-        - **Model**: DJI Mavic 3 Enterprise  
-        - **Type**: Quadcopter  
-        - **Weight**: 920 g  
-        - **Max Flight Time**: 45 minutes  
-        - **Max Speed**: 21 m/s (47 mph)  
-        - **Transmission Range**: Up to 15 km  
-        - **Camera**: 4/3 CMOS, 20MP with mechanical shutter  
-        - **Battery**: 5000 mAh LiPo (12V)  
-        - **Navigation**: GPS + GLONASS + Galileo  
-        - **Sensors**: IMU, Barometer, Vision Sensors, Obstacle Avoidance  
-        - **Special Features**: RTK Module, Thermal Camera, Night Operations
+        - *Model*: DJI Mavic 3 Enterprise  
+        - *Type*: Quadcopter  
+        - *Weight*: 920 g  
+        - *Max Flight Time*: 45 minutes  
+        - *Max Speed*: 21 m/s (47 mph)  
+        - *Transmission Range*: Up to 15 km  
+        - *Camera*: 4/3 CMOS, 20MP with mechanical shutter  
+        - *Battery*: 5000 mAh LiPo (12V)  
+        - *Navigation*: GPS + GLONASS + Galileo  
+        - *Sensors*: IMU, Barometer, Vision Sensors, Obstacle Avoidance  
+        - *Special Features*: RTK Module, Thermal Camera, Night Operations
+        """)
+
+    st.subheader("🚀 Key Features")
+    with st.expander("🧩 Show Key Features"):
+        st.markdown("""
+        - Real-time telemetry monitoring  
+        - Long-range communication up to 15 km  
+        - High-resolution thermal and RGB imaging  
+        - GPS and vision-based navigation  
+        - Obstacle avoidance and fail-safe return  
+        - Modular payload support (e.g., camera, sensors)  
+        - Live camera toggle functionality  
+        - Data logging and analysis capabilities  
+        """)
+
+    st.subheader("🖥️ Monitoring Capabilities")
+    with st.expander("📡 Show Monitoring Capabilities"):
+        st.markdown("""
+        - Battery voltage status and drop detection  
+        - Altitude tracking and graphing  
+        - Internal temperature tracking  
+        - Roll, Pitch, and Yaw measurements  
+        - Real-time location on map (Coimbatore, Tamil Nadu)  
+        - Distance travelled and drone running time  
+        - Connection health monitoring  
         """)
 
 # Dashboard Page
@@ -120,15 +145,15 @@ def dashboard_page():
     col8.metric("🌎 Longitude", f"{drone_data['Longitude']}°")
 
     st.metric("⏱ Running Time", f"{runtime:.2f} sec")
-    st.metric("📍➡️📍Distance Travelled", f"{distance_km} km")
-    st.markdown(f"📶 *Connection Health:* `{drone_data['Connection Health']}`")
+    st.metric("📍➡📍Distance Travelled", f"{distance_km} km")
+    st.markdown(f"📶 Connection Health: {drone_data['Connection Health']}")
 
     # Camera toggle button
     if st.button("📸 Toggle Camera"):
         st.session_state.camera_on = not st.session_state.camera_on
 
     camera_status = "🟢 ON" if st.session_state.camera_on else "🔴 OFF"
-    st.markdown(f"**Camera Status:** {camera_status}")
+    st.markdown(f"*Camera Status:* {camera_status}")
 
     time.sleep(1)
     st.rerun()
@@ -161,7 +186,7 @@ def graph_page():
                       get_radius=100),
         ],
     ))
-    st.markdown(f"📌 **Latitude:** `{latitude}`  \n📌 **Longitude:** `{longitude}`")
+    st.markdown(f"📌 *Latitude:* {latitude}  \n📌 *Longitude:* {longitude}")
 
 # Sidebar Navigation
 st.sidebar.title("📂 Navigation")
@@ -181,10 +206,3 @@ elif st.session_state.page == 'dashboard':
     dashboard_page()
 elif st.session_state.page == 'graph':
     graph_page()
-
-
-# Page Routing
-if st.session_state.page == 'home':
-    home_page()
-elif st.session_state.page == 'dashboard':
-    dashboard_page()
